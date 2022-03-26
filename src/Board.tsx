@@ -6,10 +6,13 @@ import Square from "./Square"
 
 // Actions
 import { updateSquares } from './redux/actions/updateSquares';
+import { RootState } from './redux/rootReducer';
 
 const Board: React.FC = () => {
     const dispatch = useDispatch()
-    const squares = useSelector<SquaresState, SquaresState["squares"]>((state) => state.squares)
+    const squares = useSelector((state: RootState) => state.squares.squares)
+
+    console.log(squares);
 
     function clickHandler(index: number): void {
         const newSquares = [...squares];
