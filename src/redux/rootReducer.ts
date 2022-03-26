@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
 
+// Reducers
 import { squareReducer } from './reducers/squareReducer';
-
-// import shopReducer from './..';
+import { playerReducer } from './reducers/playerReducer';
 
   const rootReducer = combineReducers({
 	squares: squareReducer,
+    isX: playerReducer
 });
 
 export default rootReducer
