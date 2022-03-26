@@ -1,8 +1,8 @@
 import { createStore } from 'redux';
-import { notesReducer } from './notesReducer';
+import { squareReducer } from './squareReducer';
 
 export const store = createStore(
-notesReducer, 
-(window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
-(window as any).__REDUX_DEVTOOLS_EXTENSION__()
+    squareReducer, 
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__()
 );

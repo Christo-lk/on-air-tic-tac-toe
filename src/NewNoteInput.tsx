@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 
 interface newNoteInputProps {
-    addNote(note: string): void;
+    addNote(note: string[]): void;
 }
 
 const NewNoteInput: React.FC<newNoteInputProps> = ({ addNote }) => {
@@ -12,7 +12,7 @@ const NewNoteInput: React.FC<newNoteInputProps> = ({ addNote }) => {
     }
 
     const onAddNoteClick = () => {
-        addNote(note)
+        addNote(["","","",""])
         setNote("")
     }
 
