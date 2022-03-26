@@ -17,9 +17,7 @@ const Board: React.FC<Props> = ({ winner }) => {
     const dispatch = useDispatch()
     const squares = useSelector((state: RootState) => state.squares.squares)
     const isX = useSelector((state: RootState) => state.isX)
-
-    console.log(winner);
-
+    const gridSize = useSelector((state: RootState) => state.gridSize)
 
     function clickHandler(index: number): void {
         const newSquares = [...squares];
@@ -28,14 +26,14 @@ const Board: React.FC<Props> = ({ winner }) => {
             return
         }
 
-        newSquares[index] = !isX ? "X" : "O"
+        newSquares[index] = isX ? "X" : "O"
 
         dispatch(updateIsX(!isX))
         dispatch(updateSquares(newSquares))
     }
 
     return (
-        <div className="board">
+        <div className={`board ${gridSize}`}>
             {squares.map((square, index) => {
                 return <Square key={index} value={square} clickHandler={() => clickHandler(index)} />
             })}

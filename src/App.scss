@@ -4,30 +4,99 @@ $color-on-air-red: #fb4e3e;
   text-align: center;
 }
 
-.square { 
+.game-container { 
     display: flex;
-    justify-content: center;
     align-items: center;
-    background: #d3d5d4;
-    border-radius: 2px;
-    font-size: 45px;
-    font-weight: 500;
-    cursor: pointer;
-    outline: none;
-    margin:3px;
-    color: $color-on-air-red;
+    flex-direction: column;
 
-    &:hover{
-        background-color: #B6B8B8;
+    .board { 
+        border-radius: 10px;
+        width: 300px;
+        height: 300px;
+        margin: 0 auto;
+        display: grid;
+        grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+    
+        .square { 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #d3d5d4;
+            border-radius: 2px;
+            font-size: 45px;
+            font-weight: 500;
+            cursor: pointer;
+            outline: none;
+            margin:3px;
+            color: $color-on-air-red;
+        
+            &:hover{
+                background-color: #B6B8B8;
+            }
+        }
+    
+        &.XXS {
+            width: 50px;
+            height: 50px;
+    
+            .square {
+                font-size: 5px;
+            }
+        }
+    
+        &.L {
+            width: 450px;
+            height: 450px;
+    
+            .square {
+                font-size: 65px;
+            }
+        }
+    
+        &.XXL {
+            width: 600px;
+            height: 600px;
+    
+            .square {
+                font-size: 100px;
+            }
+        }
+    
+    }
+    
+    .grid-size-options-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    
+        .grid-size-option {
+            margin-left: 10px;
+            cursor: pointer;
+            opacity: 70%;
+    
+    
+            &:hover{
+                opacity: 90%
+            }
+        }
     }
 }
 
-.board { 
-// border: 4px solid darkblue;
-border-radius: 10px;
-width: 300px;
-height: 300px;
-margin: 0 auto;
-display: grid;
-grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+.button-primary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 25px;
+    background-color: $color-on-air-red;
+    color: black;
+    max-width: max-content;
+    outline: none;
+    cursor: pointer;
+    font-weight: 800;
+    border: none;
+
+    &:hover {
+        background-color: #C83E31;
+    }
 }
