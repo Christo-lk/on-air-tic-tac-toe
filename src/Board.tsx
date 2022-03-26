@@ -16,14 +16,11 @@ type Props = {
 
 const Board: React.FC<Props> = ({ winner }) => {
     const dispatch = useDispatch()
-
     const squares = useSelector((state: RootState) => state.squares)
     const isX = useSelector((state: RootState) => state.isX)
     const gridSize = useSelector((state: RootState) => state.gridSize)
+
     const [emptySquares, setEmptySquares] = useState<SquareType[]>(squares)
-
-    console.log(squares);
-
 
     useEffect(() => {
         let array = []
@@ -53,27 +50,6 @@ const Board: React.FC<Props> = ({ winner }) => {
         playTurn(updatedSquares, isX)
         updateEmptySquares(id)
     }
-
-    // function clickHandler(id: number): void {
-    //     // debugger;
-    //     const newSquares = [...squares]
-
-    //     let filteredArr = squares.filter(s => s.id !== id);
-    //     const currentSquare = squares.filter(s => s.id === id)[0]
-
-    //     console.log(filteredArr)
-    //     console.log(currentSquare)
-
-
-    //     if (newSquares[id].value || winner !== null ) {
-    //         return
-    //     }
-
-    //     newSquares[id].value = isX ? "X" : "O"
-
-    //     playTurn(newSquares, isX)
-    //     updateEmptySquares(id)
-    // }
 
     function updateEmptySquares(index: number) { 
         const newArray = [...emptySquares]

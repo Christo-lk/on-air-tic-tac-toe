@@ -3,7 +3,7 @@ export type SquareType = {
     value: string; 
 };
 
-const initialState = [
+export const initalState = [
 	{ id: 1, value: '' },
 	{ id: 2, value: '' },
 	{ id: 3, value: '' },
@@ -21,7 +21,7 @@ export type Action = {
 };
 
 // he walks through the reduver logic at 5:42
-export const squareReducer = (state: SquareType[] = initialState, action: Action) => {
+export const squareReducer = (state: SquareType[] = initalState, action: Action) => {
 	switch (action.type) {
 		case 'UPDATE_SQUARES': {
 			return [...action.payload];
