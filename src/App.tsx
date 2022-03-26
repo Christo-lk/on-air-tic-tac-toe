@@ -121,7 +121,7 @@ function App() {
             </div>
             <div className="border-bottom"/>
             <div className="game-container">
-                <h2>Current Player: {currentPlayer}</h2>
+                <h2 className="current-player">Current Player: {currentPlayer}</h2>
                 <div className="grid-size-options-container">
                     <p>Grid size: </p>
                     <p className="grid-size-option" onClick={() => gridSizeHandler("XXS")}>XXS</p>
@@ -131,7 +131,7 @@ function App() {
                 </div>
                 <Board winner={winner} ai={ai} />
                 {!gameStarted && !ai && <p className="alien-text" onClick={aiHandler}>Click here to play against a real life Alien 👽</p>}
-                <h3>{returnBanter() && returnBanter()}</h3>
+                <h3>{ !winner && returnBanter()}</h3>
                 <h2>{returnResult()}</h2>
                 {(winner || noWinner) && <button className="button-primary" onClick={cleanState}>Play again!</button>}
             </div>

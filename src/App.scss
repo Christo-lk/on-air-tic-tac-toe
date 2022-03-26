@@ -1,6 +1,10 @@
 $color-on-air-red: #fb4e3e;
 $color-alien: #00f000;
 
+h1 , h2, p{
+    margin: 0px;
+}
+
 .App {
 	text-align: center;
     padding: 20px 0px;
@@ -17,10 +21,6 @@ $color-alien: #00f000;
         margin: 0px auto;
         font-size: 12px;
         margin-bottom: 20px;
-
-        h1 {
-            margin: 0px;
-        }
 	}
 
     .border-bottom {
@@ -38,6 +38,10 @@ $color-alien: #00f000;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
+
+    .current-player { 
+        margin-top: 20px;
+    }
 
 	.board {
 		border-radius: 10px;
@@ -107,6 +111,7 @@ $color-alien: #00f000;
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
+        margin: 20px 0px;
 
 		.grid-size-option {
 			margin-left: 10px;
@@ -122,11 +127,16 @@ $color-alien: #00f000;
 	.alien-text {
 		opacity: 30%;
 		cursor: pointer;
+        margin-top: 20px;
 
 		&:hover {
 			opacity: 70%;
 		}
 	}
+
+    .button-primary {
+        margin-top: 20px;
+    }
 }
 
 .button-primary {
