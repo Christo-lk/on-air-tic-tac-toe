@@ -22,5 +22,4 @@ export const squareReducer =(state: SquaresState = initialState, action: Action 
             return state
 
     }
-
 }

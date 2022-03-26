@@ -1,6 +1,6 @@
-import './App.css';
+import './App.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import NewNoteInput  from "./NewNoteInput"
+import NewNoteInput from "./NewNoteInput"
 import { SquaresState } from './squareReducer';
 import { useEffect } from 'react';
 
@@ -20,18 +20,17 @@ function App() {
     return (
         <div className="App">
             <h1>test on air</h1>
-            {/* <NewNoteInput addNote={addNote}/> */}
 
-            <button onClick={() => updateSquares(["a","b","v"])}>CLICKME</button>
-            
+            <button onClick={() => updateSquares(["a", "b", "v"])}>CLICKME</button>
+
             <hr></hr>
 
-            {notes.map((square, index) => {
-                 return <div className="square" />
+            <div className="board">
+                {notes.map((square, index) => {
+                    return <div className="square" />
                 })}
-            <ul>
-            </ul>
-        </div>
+            </div>
+        </div >
     );
 }
 
