@@ -9,24 +9,29 @@ import Square from "./Square"
 import { updateSquares } from './redux/actions/updateSquares';
 import { updateIsX } from './redux/actions/updateIsX';
 
-const Board: React.FC = () => {
+type Props = {
+    winner: string | null;
+}
+
+const Board: React.FC<Props> = ({ winner }) => {
     const dispatch = useDispatch()
     const squares = useSelector((state: RootState) => state.squares.squares)
     const isX = useSelector((state: RootState) => state.isX)
 
-    console.log(squares);
+    console.log(winner);
 
-    console.log('notX: ', !isX)
 
     function clickHandler(index: number): void {
         const newSquares = [...squares];
 
-        if (!newSquares[index] /*|| winner */) {
-            newSquares[index] = !isX ? "X" : "O"
-
-            dispatch(updateIsX(!isX))
-            dispatch(updateSquares(newSquares))
+        if (newSquares[index] || winner !== null ) {
+            return
         }
+
+        newSquares[index] = !isX ? "X" : "O"
+
+        dispatch(updateIsX(!isX))
+        dispatch(updateSquares(newSquares))
     }
 
     return (
