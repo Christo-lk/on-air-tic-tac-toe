@@ -14,7 +14,7 @@ import { updateGridSize } from './redux/actions/updateGridSize';
 function App() {
     const dispatch = useDispatch()
 
-    const squares = useSelector((state: RootState) => state.squares.squares)
+    const squares = useSelector((state: RootState) => state.squares)
     const isX = useSelector((state: RootState) => state.isX)
     const gridSize = useSelector((state: RootState) => state.gridSize)
 
@@ -38,7 +38,8 @@ function App() {
             const [a, b, c] = winningIndex[i];
 
             if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-                return squares[a]
+                // return squares[a]
+                return "X"
             }
         }
 
@@ -46,7 +47,7 @@ function App() {
     }
 
     function calculateNoWinner(): boolean {
-        return !squares.includes("") && !winner
+        return !squares.map(s => s.value).includes("") && !winner
     }
 
     function returnResult() {

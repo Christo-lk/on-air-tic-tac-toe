@@ -1,25 +1,33 @@
-export interface SquaresState {
-    squares: string[]
-}
+export type SquareType = {
+    id: number;
+    value: string; 
+};
 
-const initialState = {
-    squares: Array(9).fill("")
-}
+const initialState = [
+	{ id: 1, value: '' },
+	{ id: 2, value: '' },
+	{ id: 3, value: '' },
+	{ id: 4, value: '' },
+	{ id: 5, value: '' },
+	{ id: 6, value: '' },
+	{ id: 7, value: '' },
+	{ id: 8, value: '' },
+	{ id: 9, value: '' },
+];
 
 export type Action = {
-    type: "UPDATE_SQUARES",
-    payload: string[]
-}
+	type: 'UPDATE_SQUARES';
+	payload: SquareType[];
+};
 
 // he walks through the reduver logic at 5:42
-export const squareReducer =(state: SquaresState = initialState, action: Action ) => {
-    switch(action.type) {
-        case "UPDATE_SQUARES": {
-            return {...state, squares: [... action.payload]}
-        }
+export const squareReducer = (state: SquareType[] = initialState, action: Action) => {
+	switch (action.type) {
+		case 'UPDATE_SQUARES': {
+			return [...action.payload];
+		}
 
-        default:
-            return state
-
-    }
-}
+		default:
+			return state;
+	}
+};

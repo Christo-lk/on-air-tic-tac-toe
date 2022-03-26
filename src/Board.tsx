@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SquaresState } from './redux/reducers/squareReducer';
+import { SquareType } from './redux/reducers/squareReducer';
 import { RootState } from './redux/rootReducer';
 
 // Components
@@ -16,10 +16,13 @@ type Props = {
 
 const Board: React.FC<Props> = ({ winner }) => {
     const dispatch = useDispatch()
-    const squares = useSelector((state: RootState) => state.squares.squares)
+
+    const squares = useSelector((state: RootState) => state.squares)
     const isX = useSelector((state: RootState) => state.isX)
     const gridSize = useSelector((state: RootState) => state.gridSize)
-    const [emptySquares, setEmptySquares] = useState<string[]>(squares)
+    const [emptySquares, setEmptySquares] = useState<SquareType[]>(squares)
+
+    console.log(squares);
 
 
     useEffect(() => {
@@ -32,20 +35,33 @@ const Board: React.FC<Props> = ({ winner }) => {
 
         }
 
-        debugger;
     }, [squares])
 
-    function clickHandler(index: number): void {
-        const newSquares = [...squares];
+    function clickHandler(id: number): void {
+        // debugger;
+        const newSquares = [...squares]
+        // const newSquares = squares.map(s => {
+        //     if (s.value || winner !== null ) {
+        //         return 
+        //     }
 
-        if (newSquares[index] || winner !== null ) {
+        //     if(s.id === id) {
+        //         s.value = isX ? "X" : "O"
+
+        //         return s
+        //     }
+
+        //     return s
+        // });
+
+        if (newSquares[id].value || winner !== null ) {
             return
         }
 
-        newSquares[index] = isX ? "X" : "O"
+        newSquares[id].value = isX ? "X" : "O"
 
         playTurn(newSquares, isX)
-        updateEmptySquares(index)
+        updateEmptySquares(id)
     }
 
     function updateEmptySquares(index: number) { 
@@ -54,15 +70,16 @@ const Board: React.FC<Props> = ({ winner }) => {
         setEmptySquares(newArray.filter(square => square))
     }
 
-    function playTurn(squares: string[], isX: boolean){ 
+    function playTurn(squares: SquareType[], isX: boolean){ 
         dispatch(updateIsX(!isX))
+
         dispatch(updateSquares(squares))
     }
 
     return (
         <div className={`board ${gridSize}`}>
             {squares.map((square, index) => {
-                return <Square key={index} index={index} value={square} clickHandler={() => clickHandler(index)} />
+                return <Square key={square.id} value={square.value} clickHandler={() => clickHandler(square.id)} />
             })}
         </div>
     )
