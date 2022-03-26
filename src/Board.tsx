@@ -7,7 +7,6 @@ import Square from "./Square"
 // Actions
 import { updateSquares } from './redux/actions/updateSquares';
 
-
 const Board: React.FC = () => {
     const dispatch = useDispatch()
     const squares = useSelector<SquaresState, SquaresState["squares"]>((state) => state.squares)
