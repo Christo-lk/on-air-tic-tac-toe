@@ -1,5 +1,5 @@
 import './App.scss';
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './redux/rootReducer';
 
@@ -25,14 +25,14 @@ function App() {
     const winner = calculateWinner()
     const noWinner = calculateNoWinner()
     const currentPlayer = calculateCurrentPlayer()
-    
+
     function calculateCurrentPlayer() {
-        if(ai){ 
+        if (ai) {
             return isX ? "X" : "👽"
         }
 
         return isX ? "X" : "O"
-    } 
+    }
 
     function calculateWinner(): string | null {
         const winningIndex: number[][] = [
@@ -72,7 +72,7 @@ function App() {
         }
     }
 
-    function cleanState() {
+    function cleanState(): void {
         const initialSquaresState = [
             { id: 1, value: '' },
             { id: 2, value: '' },
@@ -92,11 +92,11 @@ function App() {
         setAi(false);
     }
 
-    function gridSizeHandler(size: string) {
+    function gridSizeHandler(size: string): void {
         dispatch(updateGridSize(size))
     }
 
-    function returnBanter() {
+    function returnBanter(): string | null {
         if (!winner || !noWinner) {
             switch (gridSize) {
                 case "XXS":
@@ -105,17 +105,21 @@ function App() {
                     return "Mate you need some glasses! 👀 🤓 "
             }
         }
+
+        return null
     }
 
-    function aiHandler(){ 
+    function aiHandler(): void {
         cleanState()
         setAi(true)
     }
 
     return (
         <div className="App">
-            <h1>ON AIR</h1>
-            <hr></hr>
+            <div className="logo-container">
+                <h1>ON AIR</h1>
+            </div>
+            <div className="border-bottom"/>
             <div className="game-container">
                 <h2>Current Player: {currentPlayer}</h2>
                 <div className="grid-size-options-container">
