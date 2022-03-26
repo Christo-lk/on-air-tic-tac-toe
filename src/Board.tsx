@@ -39,30 +39,41 @@ const Board: React.FC<Props> = ({ winner }) => {
 
     function clickHandler(id: number): void {
         // debugger;
-        const newSquares = [...squares]
-        // const newSquares = squares.map(s => {
-        //     if (s.value || winner !== null ) {
-        //         return 
-        //     }
+        const selectedSquare = squares.filter(s => s.id === id)[0]
+        let otherSquares = squares.filter(s => s.id !== id);
 
-        //     if(s.id === id) {
-        //         s.value = isX ? "X" : "O"
-
-        //         return s
-        //     }
-
-        //     return s
-        // });
-
-        if (newSquares[id].value || winner !== null ) {
+        if (selectedSquare.value || winner !== null ) {
             return
         }
 
-        newSquares[id].value = isX ? "X" : "O"
+        selectedSquare.value = isX ? "X" : "O"
 
-        playTurn(newSquares, isX)
+        const updatedSquares = [...otherSquares, selectedSquare].sort((a,b) => a.id -b.id)
+
+        playTurn(updatedSquares, isX)
         updateEmptySquares(id)
     }
+
+    // function clickHandler(id: number): void {
+    //     // debugger;
+    //     const newSquares = [...squares]
+
+    //     let filteredArr = squares.filter(s => s.id !== id);
+    //     const currentSquare = squares.filter(s => s.id === id)[0]
+
+    //     console.log(filteredArr)
+    //     console.log(currentSquare)
+
+
+    //     if (newSquares[id].value || winner !== null ) {
+    //         return
+    //     }
+
+    //     newSquares[id].value = isX ? "X" : "O"
+
+    //     playTurn(newSquares, isX)
+    //     updateEmptySquares(id)
+    // }
 
     function updateEmptySquares(index: number) { 
         const newArray = [...emptySquares]
