@@ -12,14 +12,14 @@ import { updateIsX } from './redux/actions/updateIsX';
 import { updateGridSize } from './redux/actions/updateGridSize';
 import { updateEmptySquares } from './redux/actions/updateEmptySquares';
 
-
-
 function App() {
+    
     const dispatch = useDispatch()
 
     const squares = useSelector((state: RootState) => state.squares)
     const isX = useSelector((state: RootState) => state.isX)
     const gridSize = useSelector((state: RootState) => state.gridSize)
+    
 
     const winner = calculateWinner()
     const noWinner = calculateNoWinner()

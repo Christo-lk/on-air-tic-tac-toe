@@ -16,21 +16,22 @@ type Props = {
 }
 
 const Board: React.FC<Props> = ({ winner }) => {
+    const [isAiTurn, setIsAiTurn] = useState<boolean>(false);
+
     const dispatch = useDispatch()
     const squares = useSelector((state: RootState) => state.squares)
     const emptySquares = useSelector((state: RootState) => state.emptySquares)
     const isX = useSelector((state: RootState) => state.isX)
     const gridSize = useSelector((state: RootState) => state.gridSize)
 
-    // const [emptySquares, setEmptySquares] = useState<SquareType[]>(squares)
-
     useEffect(() => {
         if((!isX && emptySquares.length > 0) && !winner) {
+            setIsAiTurn(true);
             setTimeout(() => playAiTurn(), 500)
         }
     }, [squares])
 
-    function playAiTurn(){ 
+    function playAiTurn(): void{ 
         const randomIndex = Math.floor(Math.random() * (emptySquares.length) + 0)
 
         const currentSquare = emptySquares[randomIndex]
@@ -41,15 +42,14 @@ const Board: React.FC<Props> = ({ winner }) => {
 
         playTurn(updatedSquares, isX)
         setEmptySquares(currentSquare.id)
-
-        return  
+        setIsAiTurn(false)
     }
 
     function clickHandler(id: number): void {
         const selectedSquare = squares.filter(s => s.id === id)[0]
         const otherSquares = squares.filter(s => s.id !== id);
 
-        if (selectedSquare.value || winner !== null ) {
+        if (selectedSquare.value || winner !== null || isAiTurn ) {
             return
         }
 
@@ -60,16 +60,13 @@ const Board: React.FC<Props> = ({ winner }) => {
         setEmptySquares(id)
     }
 
-    function setEmptySquares(id: number) { 
+    function setEmptySquares(id: number): void { 
         const newArray = emptySquares.filter(square => id !== square.id)
 
         dispatch(updateEmptySquares(newArray))
-        // setEmptySquares(newArray)
     }
 
-    console.log("empty: ", emptySquares)
-
-    function playTurn(squares: SquareType[], isX: boolean){ 
+    function playTurn(squares: SquareType[], isX: boolean): void { 
         dispatch(updateIsX(!isX))
 
         dispatch(updateSquares(squares))
