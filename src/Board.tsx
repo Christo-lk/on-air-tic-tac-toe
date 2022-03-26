@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { updateSquares } from './redux/actions/updateSquares';
 import { SquaresState } from './redux/reducers/squareReducer';
 
 // Components
 import Square from "./Square"
 
 // Actions
+import { updateSquares } from './redux/actions/updateSquares';
 
 
 const Board: React.FC = () => {
