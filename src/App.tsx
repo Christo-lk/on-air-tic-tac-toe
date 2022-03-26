@@ -49,9 +49,8 @@ function App() {
         for (let i = 0; i < winningIndex.length; i++) {
             const [a, b, c] = winningIndex[i];
 
-            if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-                // return squares[a]
-                return "X"
+            if (squares[a].value && squares[a].value === squares[b].value && squares[a].value === squares[c].value) {
+                return squares[a].value
             }
         }
 

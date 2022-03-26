@@ -23,39 +23,48 @@ const Board: React.FC<Props> = ({ winner }) => {
     const [emptySquares, setEmptySquares] = useState<SquareType[]>(squares)
 
     useEffect(() => {
-        let array = []
-        if(!isX) {
-
-            for(let i = 0; i< squares.length; i++) { 
-                array.push(squares.indexOf(squares[i]))
-            }
-
+        if(!isX && emptySquares.length > 0) {
+            setTimeout(() => playAiTurn(), 500)
         }
-
     }, [squares])
 
+    function playAiTurn(){ 
+        const randomIndex = Math.floor(Math.random() * (emptySquares.length) + 0)
+
+        const currentSquare = emptySquares[randomIndex]
+        const otherSquares = squares.filter(s => s.id !== currentSquare.id);
+
+        currentSquare.value = isX ? "X" : "O"
+        const updatedSquares = [...otherSquares, currentSquare].sort((a,b) => a.id -b.id)
+
+        playTurn(updatedSquares, isX)
+        updateEmptySquares(currentSquare.id)
+
+        return  
+    }
+
     function clickHandler(id: number): void {
-        // debugger;
         const selectedSquare = squares.filter(s => s.id === id)[0]
-        let otherSquares = squares.filter(s => s.id !== id);
+        const otherSquares = squares.filter(s => s.id !== id);
 
         if (selectedSquare.value || winner !== null ) {
             return
         }
 
         selectedSquare.value = isX ? "X" : "O"
-
         const updatedSquares = [...otherSquares, selectedSquare].sort((a,b) => a.id -b.id)
 
         playTurn(updatedSquares, isX)
         updateEmptySquares(id)
     }
 
-    function updateEmptySquares(index: number) { 
-        const newArray = [...emptySquares]
+    function updateEmptySquares(id: number) { 
+        const newArray = emptySquares.filter(square => id !== square.id)
 
-        setEmptySquares(newArray.filter(square => square))
+        setEmptySquares(newArray)
     }
+
+    console.log("empty: ", emptySquares)
 
     function playTurn(squares: SquareType[], isX: boolean){ 
         dispatch(updateIsX(!isX))
