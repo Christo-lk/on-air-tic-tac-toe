@@ -9,6 +9,7 @@ import Square from "./Square"
 // Actions
 import { updateSquares } from './redux/actions/updateSquares';
 import { updateIsX } from './redux/actions/updateIsX';
+import { updateEmptySquares } from './redux/actions/updateEmptySquares';
 
 type Props = {
     winner: string | null;
@@ -17,13 +18,14 @@ type Props = {
 const Board: React.FC<Props> = ({ winner }) => {
     const dispatch = useDispatch()
     const squares = useSelector((state: RootState) => state.squares)
+    const emptySquares = useSelector((state: RootState) => state.emptySquares)
     const isX = useSelector((state: RootState) => state.isX)
     const gridSize = useSelector((state: RootState) => state.gridSize)
 
-    const [emptySquares, setEmptySquares] = useState<SquareType[]>(squares)
+    // const [emptySquares, setEmptySquares] = useState<SquareType[]>(squares)
 
     useEffect(() => {
-        if(!isX && emptySquares.length > 0) {
+        if((!isX && emptySquares.length > 0) && !winner) {
             setTimeout(() => playAiTurn(), 500)
         }
     }, [squares])
@@ -38,7 +40,7 @@ const Board: React.FC<Props> = ({ winner }) => {
         const updatedSquares = [...otherSquares, currentSquare].sort((a,b) => a.id -b.id)
 
         playTurn(updatedSquares, isX)
-        updateEmptySquares(currentSquare.id)
+        setEmptySquares(currentSquare.id)
 
         return  
     }
@@ -55,13 +57,14 @@ const Board: React.FC<Props> = ({ winner }) => {
         const updatedSquares = [...otherSquares, selectedSquare].sort((a,b) => a.id -b.id)
 
         playTurn(updatedSquares, isX)
-        updateEmptySquares(id)
+        setEmptySquares(id)
     }
 
-    function updateEmptySquares(id: number) { 
+    function setEmptySquares(id: number) { 
         const newArray = emptySquares.filter(square => id !== square.id)
 
-        setEmptySquares(newArray)
+        dispatch(updateEmptySquares(newArray))
+        // setEmptySquares(newArray)
     }
 
     console.log("empty: ", emptySquares)

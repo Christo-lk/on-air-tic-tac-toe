@@ -10,18 +10,9 @@ import Board from "./Board"
 import { updateSquares } from './redux/actions/updateSquares';
 import { updateIsX } from './redux/actions/updateIsX';
 import { updateGridSize } from './redux/actions/updateGridSize';
+import { updateEmptySquares } from './redux/actions/updateEmptySquares';
 
-export const initialSquaresState = [
-	{ id: 1, value: '' },
-	{ id: 2, value: '' },
-	{ id: 3, value: '' },
-	{ id: 4, value: '' },
-	{ id: 5, value: '' },
-	{ id: 6, value: '' },
-	{ id: 7, value: '' },
-	{ id: 8, value: '' },
-	{ id: 9, value: '' },
-];
+
 
 function App() {
     const dispatch = useDispatch()
@@ -71,10 +62,21 @@ function App() {
         }
     }
 
-    console.log('SS', initialSquaresState)
-
     function cleanState() {
+        const initialSquaresState = [
+            { id: 1, value: '' },
+            { id: 2, value: '' },
+            { id: 3, value: '' },
+            { id: 4, value: '' },
+            { id: 5, value: '' },
+            { id: 6, value: '' },
+            { id: 7, value: '' },
+            { id: 8, value: '' },
+            { id: 9, value: '' },
+        ];
+
         dispatch(updateSquares(initialSquaresState))
+        dispatch(updateEmptySquares(initialSquaresState))
         dispatch(updateIsX(true))
     }
 
