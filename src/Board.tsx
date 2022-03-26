@@ -10,12 +10,15 @@ import Square from "./Square"
 import { updateSquares } from './redux/actions/updateSquares';
 import { updateIsX } from './redux/actions/updateIsX';
 import { updateEmptySquares } from './redux/actions/updateEmptySquares';
+import { updateGameStarted } from './redux/actions/updateGameStarted';
+
 
 type Props = {
     winner: string | null;
+    ai: boolean;
 }
 
-const Board: React.FC<Props> = ({ winner }) => {
+const Board: React.FC<Props> = ({ winner, ai }) => {
     const [isAiTurn, setIsAiTurn] = useState<boolean>(false);
 
     const dispatch = useDispatch()
@@ -23,9 +26,10 @@ const Board: React.FC<Props> = ({ winner }) => {
     const emptySquares = useSelector((state: RootState) => state.emptySquares)
     const isX = useSelector((state: RootState) => state.isX)
     const gridSize = useSelector((state: RootState) => state.gridSize)
+    const gameStarted = useSelector((state: RootState) => state.gameStarted)
 
     useEffect(() => {
-        if((!isX && emptySquares.length > 0) && !winner) {
+        if(!isX && emptySquares.length > 0 && ai && !winner) {
             setIsAiTurn(true);
             setTimeout(() => playAiTurn(), 500)
         }
@@ -46,6 +50,8 @@ const Board: React.FC<Props> = ({ winner }) => {
     }
 
     function clickHandler(id: number): void {
+        !gameStarted && dispatch(updateGameStarted(true))
+
         const selectedSquare = squares.filter(s => s.id === id)[0]
         const otherSquares = squares.filter(s => s.id !== id);
 
@@ -73,7 +79,7 @@ const Board: React.FC<Props> = ({ winner }) => {
     }
 
     return (
-        <div className={`board ${gridSize}`}>
+        <div className={`board ${gridSize} ${ai ? "alien" : ""}`}>
             {squares.map((square, index) => {
                 return <Square key={square.id} value={square.value} clickHandler={() => clickHandler(square.id)} />
             })}

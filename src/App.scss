@@ -1,4 +1,5 @@
 $color-on-air-red: #fb4e3e;
+$color-alien: #00F000;
 
 .App {
   text-align: center;
@@ -16,12 +17,12 @@ $color-on-air-red: #fb4e3e;
         margin: 0 auto;
         display: grid;
         grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-    
+
         .square { 
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #d3d5d4;
+            background-color: #d3d5d4;
             border-radius: 2px;
             font-size: 45px;
             font-weight: 500;
@@ -32,6 +33,16 @@ $color-on-air-red: #fb4e3e;
         
             &:hover{
                 background-color: #B6B8B8;
+            }
+        }
+
+        &.alien { 
+            .square { 
+                background-color: $color-alien;
+
+                &:hover {
+                    opacity: 70%;
+                }
             }
         }
     
@@ -81,7 +92,7 @@ $color-on-air-red: #fb4e3e;
         }
     }
 
-    .alien {
+    .alien-text {
         opacity: 30%;
         cursor: pointer;
 

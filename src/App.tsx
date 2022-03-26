@@ -11,15 +11,16 @@ import { updateSquares } from './redux/actions/updateSquares';
 import { updateIsX } from './redux/actions/updateIsX';
 import { updateGridSize } from './redux/actions/updateGridSize';
 import { updateEmptySquares } from './redux/actions/updateEmptySquares';
+import { updateGameStarted } from './redux/actions/updateGameStarted';
 
 function App() {
     const [ai, setAi] = useState<boolean>(false);
-    const [gameStarted, setGameStarted] = useState<boolean>(false);
     const dispatch = useDispatch()
 
     const squares = useSelector((state: RootState) => state.squares)
     const isX = useSelector((state: RootState) => state.isX)
     const gridSize = useSelector((state: RootState) => state.gridSize)
+    const gameStarted = useSelector((state: RootState) => state.gameStarted)
 
     const winner = calculateWinner()
     const noWinner = calculateNoWinner()
@@ -49,6 +50,7 @@ function App() {
             const [a, b, c] = winningIndex[i];
 
             if (squares[a].value && squares[a].value === squares[b].value && squares[a].value === squares[c].value) {
+                dispatch(updateGameStarted(false))
                 return squares[a].value
             }
         }
@@ -86,6 +88,8 @@ function App() {
         dispatch(updateSquares(initialSquaresState))
         dispatch(updateEmptySquares(initialSquaresState))
         dispatch(updateIsX(true))
+        dispatch(updateGameStarted(false))
+        setAi(false);
     }
 
     function gridSizeHandler(size: string) {
@@ -103,6 +107,11 @@ function App() {
         }
     }
 
+    function aiHandler(){ 
+        cleanState()
+        setAi(true)
+    }
+
     return (
         <div className="App">
             <h1>ON AIR</h1>
@@ -116,9 +125,9 @@ function App() {
                     <p className="grid-size-option" onClick={() => gridSizeHandler("L")}>L</p>
                     <p className="grid-size-option" onClick={() => gridSizeHandler("XXL")}>XXL</p>
                 </div>
-                <Board winner={winner} />
-                {!gameStarted && <p className="alien" onClick={() => setAi(true)}>Click here to play against a real life Alien 👽</p>}
-                <h3>{returnBanter()}</h3>
+                <Board winner={winner} ai={ai} />
+                {!gameStarted && !ai && <p className="alien-text" onClick={aiHandler}>Click here to play against a real life Alien 👽</p>}
+                <h3>{returnBanter() && returnBanter()}</h3>
                 <h2>{returnResult()}</h2>
                 {(winner || noWinner) && <button className="button-primary" onClick={cleanState}>Play again!</button>}
             </div>
