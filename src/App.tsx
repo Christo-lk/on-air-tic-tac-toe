@@ -13,17 +13,25 @@ import { updateGridSize } from './redux/actions/updateGridSize';
 import { updateEmptySquares } from './redux/actions/updateEmptySquares';
 
 function App() {
-    
+    const [ai, setAi] = useState<boolean>(false);
+    const [gameStarted, setGameStarted] = useState<boolean>(false);
     const dispatch = useDispatch()
 
     const squares = useSelector((state: RootState) => state.squares)
     const isX = useSelector((state: RootState) => state.isX)
     const gridSize = useSelector((state: RootState) => state.gridSize)
-    
 
     const winner = calculateWinner()
     const noWinner = calculateNoWinner()
-    const currentPlayer = isX ? "X" : "O"
+    const currentPlayer = calculateCurrentPlayer()
+    
+    function calculateCurrentPlayer() {
+        if(ai){ 
+            return isX ? "X" : "👽"
+        }
+
+        return isX ? "X" : "O"
+    } 
 
     function calculateWinner(): string | null {
         const winningIndex: number[][] = [
@@ -54,7 +62,7 @@ function App() {
 
     function returnResult() {
         if (winner) {
-            return `🔥🔥 Player ${winner} wins !! 🔥🔥`
+            return `🔥🔥  ${ai ? "👽" : "Player " + winner} wins !! 🔥🔥`
         }
 
         if (noWinner) {
@@ -109,6 +117,7 @@ function App() {
                     <p className="grid-size-option" onClick={() => gridSizeHandler("XXL")}>XXL</p>
                 </div>
                 <Board winner={winner} />
+                {!gameStarted && <p className="alien" onClick={() => setAi(true)}>Click here to play against a real life Alien 👽</p>}
                 <h3>{returnBanter()}</h3>
                 <h2>{returnResult()}</h2>
                 {(winner || noWinner) && <button className="button-primary" onClick={cleanState}>Play again!</button>}

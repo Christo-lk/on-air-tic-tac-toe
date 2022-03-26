@@ -80,6 +80,15 @@ $color-on-air-red: #fb4e3e;
             }
         }
     }
+
+    .alien {
+        opacity: 30%;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 70%;
+        }
+    }
 }
 
 .button-primary {
@@ -99,4 +108,6 @@ $color-on-air-red: #fb4e3e;
     &:hover {
         background-color: #C83E31;
     }
+
+   
 }
