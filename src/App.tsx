@@ -1,5 +1,5 @@
 import './App.scss';
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './redux/rootReducer';
 
@@ -74,12 +74,12 @@ function App() {
                 case "XXS":
                     return "Bonus points for playing left handed with one eye shut 😉 "
                 case "XXL":
-                    return "Mate you need to get yourself some glasses! 👀 🤓 "
-                default:
-                    return ""
+                    return "Mate you need some glasses! 👀 🤓 "
             }
         }
     }
+
+  
 
     return (
         <div className="App">
