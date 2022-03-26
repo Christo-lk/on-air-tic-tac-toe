@@ -6,7 +6,7 @@ const initialState = {
     squares: Array(9).fill("")
 }
 
-type Action = {
+export type Action = {
     type: "UPDATE_SQUARES",
     payload: string[]
 }

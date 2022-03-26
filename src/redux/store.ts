@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import { squareReducer } from './squareReducer';
+import { squareReducer } from './reducers/squareReducer';
 
 export const store = createStore(
     squareReducer, 
