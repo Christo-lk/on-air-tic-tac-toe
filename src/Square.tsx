@@ -1,8 +1,5 @@
-// import { SquareType } from "./App"
-import { SquareType } from "./redux/reducers/squareReducer"
-
 type Props = {
-    value: any;
+    value: string;
     clickHandler: () => void;
 }
 

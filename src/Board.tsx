@@ -12,7 +12,6 @@ import { updateIsX } from './redux/actions/updateIsX';
 import { updateEmptySquares } from './redux/actions/updateEmptySquares';
 import { updateGameStarted } from './redux/actions/updateGameStarted';
 
-
 type Props = {
     winner: string | null;
     ai: boolean;
@@ -80,7 +79,7 @@ const Board: React.FC<Props> = ({ winner, ai }) => {
 
     return (
         <div className={`board ${gridSize} ${ai ? "alien" : ""}`}>
-            {squares.map((square, index) => {
+            {squares.map((square) => {
                 return <Square key={square.id} value={square.value} clickHandler={() => clickHandler(square.id)} />
             })}
         </div>

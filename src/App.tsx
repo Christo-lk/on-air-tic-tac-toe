@@ -64,7 +64,20 @@ function App() {
 
     function returnResult() {
         if (winner) {
+
+
+
+            if(ai && winner === "O") { 
+                return `🔥🔥 👽 wins !! 🔥🔥`
+            }
+            return `🔥🔥 Player ${ winner} wins !! 🔥🔥`
+
+
             return `🔥🔥  ${ai ? "👽" : "Player " + winner} wins !! 🔥🔥`
+
+
+
+
         }
 
         if (noWinner) {
