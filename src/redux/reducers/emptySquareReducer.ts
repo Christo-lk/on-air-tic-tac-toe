@@ -1,9 +1,9 @@
 export type SquareType = {
-    id: number;
-    value: string; 
+	id: number;
+	value: string;
 };
 
-export const initalState = [
+export const initalState: SquareType[] = [
 	{ id: 1, value: '' },
 	{ id: 2, value: '' },
 	{ id: 3, value: '' },
@@ -20,7 +20,6 @@ export type Action = {
 	payload: SquareType[];
 };
 
-// he walks through the reduver logic at 5:42
 export const emptySquareReducer = (state: SquareType[] = initalState, action: Action) => {
 	switch (action.type) {
 		case 'UPDATE_EMPTY_SQUARES': {

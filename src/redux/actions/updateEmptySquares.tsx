@@ -1,9 +1,9 @@
-import {Action} from "../reducers/emptySquareReducer" //TODO: Tidy this all up
+import { Action } from "../reducers/emptySquareReducer"
 import { SquareType } from "../reducers/emptySquareReducer";
 
 export const updateEmptySquares = (squares: SquareType[]): Action => {
-	return {
-		type: 'UPDATE_EMPTY_SQUARES',
-		payload: squares,
+    return {
+        type: 'UPDATE_EMPTY_SQUARES',
+        payload: squares,
     };
 }
