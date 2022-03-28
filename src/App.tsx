@@ -12,6 +12,7 @@ import { updateIsX } from './redux/actions/updateIsX';
 import { updateGridSize } from './redux/actions/updateGridSize';
 import { updateEmptySquares } from './redux/actions/updateEmptySquares';
 import { updateGameStarted } from './redux/actions/updateGameStarted';
+import { SquareType } from './redux/reducers/squareReducer';
 
 function App() {
     const [ai, setAi] = useState<boolean>(false);
@@ -26,7 +27,7 @@ function App() {
     const noWinner = calculateNoWinner()
     const currentPlayer = calculateCurrentPlayer()
 
-    function calculateCurrentPlayer() {
+    function calculateCurrentPlayer(): string {
         if (ai) {
             return isX ? "X" : "👽"
         }
@@ -62,31 +63,24 @@ function App() {
         return !squares.map(s => s.value).includes("") && !winner
     }
 
-    function returnResult() {
+    function returnResult(): string | null {
         if (winner) {
-
-
-
-            if(ai && winner === "O") { 
+            if (ai && winner === "O") {
                 return `🔥🔥 👽 wins !! 🔥🔥`
             }
-            return `🔥🔥 Player ${ winner} wins !! 🔥🔥`
 
-
-            return `🔥🔥  ${ai ? "👽" : "Player " + winner} wins !! 🔥🔥`
-
-
-
-
+            return `🔥🔥 Player ${winner} wins !! 🔥🔥`
         }
 
         if (noWinner) {
             return "Yikes! better play again 😏 "
         }
+
+        return null;;
     }
 
     function cleanState(): void {
-        const initialSquaresState = [
+        const initialSquaresState: SquareType[] = [
             { id: 1, value: '' },
             { id: 2, value: '' },
             { id: 3, value: '' },
@@ -132,7 +126,8 @@ function App() {
             <div className="logo-container">
                 <h1>ON AIR</h1>
             </div>
-            <div className="border-bottom"/>
+            <div className="border-bottom" />
+
             <div className="game-container">
                 <h2 className="current-player">Current Player: {currentPlayer}</h2>
                 <div className="grid-size-options-container">
@@ -142,14 +137,16 @@ function App() {
                     <p className="grid-size-option" onClick={() => gridSizeHandler("L")}>L</p>
                     <p className="grid-size-option" onClick={() => gridSizeHandler("XXL")}>XXL</p>
                 </div>
+
                 <Board winner={winner} ai={ai} />
+
                 {!gameStarted && !ai && <p className="alien-text" onClick={aiHandler}>Click here to play against a real life Alien 👽</p>}
-                <h3>{ !winner && returnBanter()}</h3>
+                <h3>{!winner && returnBanter()}</h3>
                 <h2>{returnResult()}</h2>
                 {(winner || noWinner) && <button className="button-primary" onClick={cleanState}>Play again!</button>}
             </div>
         </div >
-    );
+    )
 }
 
 export default App;
