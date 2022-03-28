@@ -28,20 +28,20 @@ const Board: React.FC<Props> = ({ winner, ai }) => {
     const gameStarted: boolean = useSelector((state: RootState) => state.gameStarted)
 
     useEffect(() => {
-        if(!isX && emptySquares.length > 0 && ai && !winner) {
+        if (!isX && emptySquares.length > 0 && ai && !winner) {
             setIsAiTurn(true);
             setTimeout(() => playAiTurn(), 500)
         }
     }, [squares])
 
-    function playAiTurn(): void{ 
+    function playAiTurn(): void {
         const randomIndex: number = Math.floor(Math.random() * (emptySquares.length) + 0)
 
         const currentSquare: SquareType = emptySquares[randomIndex]
         const otherSquares: SquareType[] = squares.filter(s => s.id !== currentSquare.id);
 
         currentSquare.value = isX ? "X" : "O"
-        const updatedSquares: SquareType[] = [...otherSquares, currentSquare].sort((a,b) => a.id -b.id)
+        const updatedSquares: SquareType[] = [...otherSquares, currentSquare].sort((a, b) => a.id - b.id)
 
         playTurn(updatedSquares, isX)
         setEmptySquares(currentSquare.id)
@@ -54,24 +54,24 @@ const Board: React.FC<Props> = ({ winner, ai }) => {
         const selectedSquare: SquareType = squares.filter(s => s.id === id)[0]
         const otherSquares: SquareType[] = squares.filter(s => s.id !== id);
 
-        if (selectedSquare.value || winner !== null || isAiTurn ) {
+        if (selectedSquare.value || winner !== null || isAiTurn) {
             return
         }
 
         selectedSquare.value = isX ? "X" : "O"
-        const updatedSquares: SquareType[] = [...otherSquares, selectedSquare].sort((a,b) => a.id -b.id)
+        const updatedSquares: SquareType[] = [...otherSquares, selectedSquare].sort((a, b) => a.id - b.id)
 
         playTurn(updatedSquares, isX)
         setEmptySquares(id)
     }
 
-    function setEmptySquares(id: number): void { 
+    function setEmptySquares(id: number): void {
         const newArray: SquareType[] = emptySquares.filter(square => id !== square.id)
 
         dispatch(updateEmptySquares(newArray))
     }
 
-    function playTurn(squares: SquareType[], isX: boolean): void { 
+    function playTurn(squares: SquareType[], isX: boolean): void {
         dispatch(updateIsX(!isX))
         dispatch(updateSquares(squares))
     }

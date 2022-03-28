@@ -2,32 +2,34 @@
 $color-on-air-red: #fb4e3e;
 $color-alien: #00f000;
 
-h1, h2, p {
-    margin: 0px;
+h1,
+h2,
+p {
+	margin: 0px;
 }
 
 .App {
 	text-align: center;
-    padding: 20px 0px;
+	padding: 20px 0px;
 
 	.logo-container {
-        border: 5px solid $color-on-air-red;
-        border-radius: 3px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 130px;
-        padding: 3px 6px; 
-        color: $color-on-air-red;
-        margin: 0px auto;
-        font-size: 12px;
-        margin-bottom: 20px;
+		border: 5px solid $color-on-air-red;
+		border-radius: 3px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 130px;
+		padding: 3px 6px;
+		color: $color-on-air-red;
+		margin: 0px auto;
+		font-size: 12px;
+		margin-bottom: 20px;
 	}
 
-    .border-bottom {
-        border-bottom: 1px solid #3D3D3D ;
-        width: 100%;
-    }
+	.border-bottom {
+		border-bottom: 1px solid #3d3d3d;
+		width: 100%;
+	}
 }
 
 .game-container {
@@ -35,9 +37,9 @@ h1, h2, p {
 	align-items: center;
 	flex-direction: column;
 
-    .current-player { 
-        margin-top: 20px;
-    }
+	.current-player {
+		margin-top: 20px;
+	}
 
 	.board {
 		border-radius: 10px;
@@ -107,7 +109,7 @@ h1, h2, p {
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
-        margin: 20px 0px;
+		margin: 20px 0px;
 
 		.grid-size-option {
 			margin-left: 10px;
@@ -123,16 +125,16 @@ h1, h2, p {
 	.alien-text {
 		opacity: 30%;
 		cursor: pointer;
-        margin-top: 20px;
+		margin-top: 20px;
 
 		&:hover {
 			opacity: 70%;
 		}
 	}
 
-    .button-primary {
-        margin-top: 20px;
-    }
+	.button-primary {
+		margin-top: 20px;
+	}
 }
 
 .button-primary {
