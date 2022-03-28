@@ -18,14 +18,14 @@ function App() {
     const [ai, setAi] = useState<boolean>(false);
     const dispatch = useDispatch()
 
-    const squares = useSelector((state: RootState) => state.squares)
-    const isX = useSelector((state: RootState) => state.isX)
-    const gridSize = useSelector((state: RootState) => state.gridSize)
-    const gameStarted = useSelector((state: RootState) => state.gameStarted)
+    const squares: SquareType[] = useSelector((state: RootState) => state.squares)
+    const isX: boolean = useSelector((state: RootState) => state.isX)
+    const gridSize: string = useSelector((state: RootState) => state.gridSize)
+    const gameStarted: boolean = useSelector((state: RootState) => state.gameStarted)
 
-    const winner = calculateWinner()
-    const noWinner = calculateNoWinner()
-    const currentPlayer = calculateCurrentPlayer()
+    const winner: string | null = calculateWinner()
+    const noWinner: boolean = calculateNoWinner()
+    const currentPlayer: string = calculateCurrentPlayer()
 
     function calculateCurrentPlayer(): string {
         if (ai) {
