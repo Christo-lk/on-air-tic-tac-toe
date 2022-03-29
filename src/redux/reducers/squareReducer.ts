@@ -20,7 +20,6 @@ export type Action = {
 	payload: SquareType[];
 };
 
-// he walks through the reduver logic at 5:42
 export const squareReducer = (state: SquareType[] = initalState, action: Action) => {
 	switch (action.type) {
 		case 'UPDATE_SQUARES': {
